@@ -1,0 +1,111 @@
+Restricciones:
+1. Aplicar Ley de signos
+2. Aplicar Error Sintax al dividir entre cero
+
+Pasos:
+
+Analisador Lexico
+
+1. Filtrar espacios del string
+2. Filtrar "=" del string
+
+2. Generar array de tokensCaracteres
+	- Recorrer el String caracter a caracter, donde cada caracter son un token
+
+3. Generar array de tokens numericos
+	- Recorrer el String caracter a caracter, donde cada token va a ser la secuencia de numeros y "."
+	
+4. Generar array de tokens operadores
+	- Recorrer el String caracter a caracter, donde cada caracter son un token exceptuando cada secuencia de numeros y "." que seran otro token diferente. 
+	
+5. Pasar el array de tokensCaracteres, el array de tokens numericos y el array de tokens operadores al Analizador Sintactico
+
+Analizador Sintactico
+6. Recorrer el array de tokens numericos. Si encuentra algún token que no sea tipo double, activar "sintaxError".
+
+7. Recorrer el array de tokensCaracteres. Si encuentra algún token que no sea igual a los caracteres permitidos, activar "sintaxError". 
+
+Los caracteres permitidos son: "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "(", ")", "+", "-", "*", "/".
+
+8. Recorrer el array de tokensCaracteres de principio a fin, si encuentra un simbolo "(", por aparte recorrer el array a partir del siguiente token, hasta encontrar un ")", si no lo encuentra activar "sintaxError". Si lo encuentra, guardar la posición y sigue con el recorrido principal, si vuelve a encontrar un "(", por aparte recorrer el array a partir del siguiente token según la posición guardada, hasta encontrar un ")", si no lo encuentra activar "sintaxError". Si lo encuentra, seguir el bucle hasta el final del recorrido principal.
+
+9. Recorrer el array de tokensCaracteres de principio a fin, si encuentra un simbolo "(" si el siguiente es un ")", activar "sintaxError"
+
+10. Recorrer el array de tokensCaracteres, si encuentra un caracter "+" o "-", si el siguiente es "*", "/" o ")", activar "sintaxError".
+
+11. Recorrer el array de tokensCaracteres, si encuentra un simbolo "*" o "/", si el siguiente es "*", "/" o ")", activar "sintaxError"
+
+12. En el array de tokensCaracteres, si el ultimo caracter es un "+", "-", "*", "/", activar "sintaxError"
+
+13. Recorrer el array de tokensCaracteres, si encuentra un simbolo ")", y el siguiente es un "numero" o un ".", activar "sintaxError"
+
+14. Recorrer el array de tokensCaracteres, si encuentra un simbolo "(", si el siguiente es un "*" o "/", cativar "sintaxError"
+
+14. En el array de tokensCaracteres, si el primer caracter es un "*" o "/", activar "sintaxError"
+
+15. Recorrer el array de tokensOperadores, si encuentra un simbolo "/", y el siguiente es un numero que es igual a "0", activar "sintaxError"
+
+14. Si ErrorSintax esta desactivada realizar los siguientes pasos
+
+Tenemos el array tokensOperadores el cual contiene una operación representada por los siguientes tokens:
+10
+/
+2
++
+5
+(
+10
+(
+20
+/
+2
+*
+1
+)
++
+5
+-
+(
+2
+*
+2
+)
+-
+2
+)
+
+Desarrolla el codigo que en base al orden de las operaciones combinadas, me genere un arbol que determine el orden a operar.
+
+Luego procesar ese arbol para que me imprima el resultado de dicha operación.
+
+Toma en consideración lo siguiente:
+
+- Todas las operaciones nunca tendran errores de sintaxis (esto ya lo valide anteriormente)
+- Cuando se procese el resultado, si en algún momento se divide entre 0, que imprima en pantalla "se dividio entre 0" en lugar del resultado.
+- No siempre vendrán los mismos tokens en el array tokensOperadores.
+
+
+
+
+
+
+
+
+
+15. Recorrer el array de tokens parametros, si encuentra un simbolo "+" o "-" validar que si el siguiente token es un "+" o un "-", si es así, entonces eliminamos un signo y desplazamos el array, dejando el signo que corresponde según la ley de signos.
+
+17. Recorrer el array, al encontrar un "(" validar si el token anterior es un numero, si es un numero, entonces insetar entre el numero y el "(" el token "*".
+
+18. Aplicando el orden de operaciones combinadas realizar los siguientes pasos:
+
+1. Recorremos el array principal, al encontrar el primer "(" entonces, guardar los siguientes tokens en un array dinamico, hasta encontrar el primer ")", si encuentra otro "(", entonces hasta el segundo ")" y así consecutivamente. El "(" y ")" del principio y el final, no se guardan en el nuevo array dinamico. Luego eliminamos los tokens dentro de esos "(" y ")", en su lugar colocamos el token "V1" y así hasta llegar al final del array principal.
+
+
+
+
+
+
+
+
+
+
